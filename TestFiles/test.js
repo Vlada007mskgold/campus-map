@@ -1,32 +1,53 @@
-// Загружаем MathJax асинхронно
-const script = document.createElement('script');
-script.src = 'https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js';
-document.head.appendChild(script);
+const canvas = document.getElementById("canvas");
+const image = document.getElementById("image_1");
 
-// Обработчик для завершения загрузки MathJax
-script.onload = async () => {
-    await renderFormula();
-};
+canvas.width = 500;
+canvas.height = 500;
+document.body.appendChild(canvas);
+const ctx = canvas.getContext('2d');
 
-async function renderFormula() {
-    try {
-        // Формула LaTeX
-        const latexFormula = "\$\\forall n \\in \\mathbb{N}: n + 1 \\in \\mathbb{N}\$";
-        
-        // Создаем контейнер для формулы
-        const formulaContainer = document.createElement('div');
-        formulaContainer.id = 'latex-formula';  // назначаем уникальный id
-        formulaContainer.style.marginTop = '20px';  // немного отступ сверху
 
-        // Наполняем контейнер формулой
-        formulaContainer.textContent = latexFormula;
 
-        // Вставляем контейнер в конец body
-        document.body.appendChild(formulaContainer);
+let x = canvas.width / 2;
+let y = canvas.height / 2;
+let angle = 0;
 
-        // Применяем рендеринг MathJax
-        await MathJax.typesetPromise([formulaContainer]);
-    } catch (err) {
-        console.error('Ошибка рендеринга:', err.message);
+
+function line(x1, y1, x2, y2) {
+    ctx.beginPath();
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x2, y2);
+    ctx.stroke();
+}
+
+
+function forward(distance) {
+    const rad = angle * Math.PI / 180;
+    const newX = x + distance * Math.cos(rad);
+    const newY = y + distance * Math.sin(rad);
+    line(x, y, newX, newY);
+    x = newX;
+    y = newY;
+}
+
+
+function right(deg) {
+    angle = (angle + deg) % 360;
+}
+
+
+async function draw() {
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = 'black';
+    for (let i = 0; i < 500; i++) {
+        forward(i/5);
+        right(10);
+        await new Promise(resolve => setTimeout(resolve, 10));
     }
 }
+
+
+
+ctx.drawImage(image, 0, 0);
+draw();
+line(0, 0, 500, 250);
