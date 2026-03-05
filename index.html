@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>титле</title>
+</head>
+<body>
+
+<div>рандомный текст 1234567890</div>
+
+<script type="text/javascript">
+    // Рендерим формулу сразу после загрузки страницы
+    document.addEventListener("DOMContentLoaded", function() {
+        MathJax.typesetPromise([document.querySelector("#formula")]);
+    });
+</script>
+
+</body>
+</html>
