@@ -10,8 +10,29 @@
 
 
 <body>
-    <img id="image_1" src="1.5.png" hidden>
+    <img id="floor_1" src="1.png" hidden>
+    <img id="floor_2" src="2.png" hidden>
+    <img id="floor_3" src="3.png" hidden>
+
     <canvas id="canvas" width="500" height="500"></canvas>
+
+    <button 
+        id="button_1" 
+        style="visibility: hidden;"
+        value="1"
+        onclick="handleClick(this)"
+        >goto 1
+    </button>
+    <button 
+        id="button_2" 
+        style="visibility: hidden;"
+        value="2"
+        onclick="handleClick(this)"
+        >goto 2
+    </button>
+
+    <p id="output"></p> <!-- print(data) if button ever been clicked -->
+
     <script src="test.js"></script>
 </body>
 

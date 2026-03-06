@@ -1,16 +1,32 @@
 const canvas = document.getElementById("canvas");
-const image = document.getElementById("image_1");
+
+const floor_1 = document.getElementById("floor_1");
+const floor_2 = document.getElementById("floor_2");
+const floor_3 = document.getElementById("floor_3");
+
+const button_1 = document.getElementById("button_1");
+const button_2 = document.getElementById("button_2");
+
 
 canvas.width = 500;
 canvas.height = 500;
 document.body.appendChild(canvas);
 const ctx = canvas.getContext('2d');
 
+button_1.style.position = "absolute";
+button_1.style.top = "100px";
+button_1.style.left = "550px";
+
+button_2.style.position = "absolute";
+button_2.style.top = "150px";
+button_2.style.left = "550px";
+
 
 
 let x = canvas.width / 2;
 let y = canvas.height / 2;
 let angle = 0;
+let floor = "1";
 
 
 function line(x1, y1, x2, y2) {
@@ -47,7 +63,17 @@ async function draw() {
 }
 
 
+function handleClick(buttonElement) {
+    const data = buttonElement.value;
+    floor = data;
+    document.getElementById('output').textContent = 'Button value: ' + floor;
 
-ctx.drawImage(image, 0, 0);
+    if (floor == "1") { ctx.drawImage(floor_1, 0, 0); }
+    else { ctx.drawImage(floor_2, 0, 0); }
+}
+
+
+
 draw();
-line(0, 0, 500, 250);
+button_1.style.visibility = "visible";
+button_2.style.visibility = "visible";
