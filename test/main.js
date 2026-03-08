@@ -1,7 +1,3 @@
-import * as functions from './functions.js';
-
-
-
 const canvas = document.getElementById("canvas");
 
 const floor_1 = document.getElementById("floor_1");
@@ -15,9 +11,7 @@ const button_3 = document.getElementById("button_3");
 const button_4 = document.getElementById("button_4");
 
 
-canvas.width = 1280;
-canvas.height = 577;
-document.body.appendChild(canvas);
+
 const ctx = canvas.getContext('2d');
 
 button_1.style.position = "absolute";
@@ -38,9 +32,29 @@ button_4.style.left = "1550px";
 
 
 
-ctx.drawImage(floor_1, 0, 0);
-functions.line(0, 0, 500, 500);
+function line(x1, y1, x2, y2) {
+    ctx.beginPath();
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x2, y2);
+    ctx.stroke();
+}
 
+
+
+function handleClick(buttonElement) {
+    const data = buttonElement.value;
+    floor = data;
+    document.getElementById('output').textContent = 'Button value: ' + floor;
+
+    if (floor == "1") { ctx.drawImage(floor_1, 0, 0); }
+    else if (floor == "2") { ctx.drawImage(floor_2, 0, 0); }
+    else if (floor == "3") { ctx.drawImage(floor_3, 0, 0); }
+    else if (floor == "4") { ctx.drawImage(floor_4, 0, 0); }
+}
+
+
+
+ctx.drawImage(floor_1, 0, 0);
 button_1.style.visibility = "visible";
 button_2.style.visibility = "visible";
 button_3.style.visibility = "visible";
